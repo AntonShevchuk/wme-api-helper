@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         WME API Helper
-// @version      0.0.1
+// @version      0.0.2
 // @description  API Helper
 // @author       Anton Shevchuk
 // @license      MIT License
@@ -68,6 +68,16 @@ class APIHelper {
 
     speedLimitsObserver.observe(document.getElementById('edit-panel'), {childList: true, subtree: true});
     console.log('API Helper observer was run');
+
+    if (document.getElementById('segment-edit-general')) {
+      $('#edit-panel').trigger('segment.apihelper', [document.getElementById('segment-edit-general')]);
+    }
+    if (document.getElementById('landmark-edit-general')) {
+      $('#edit-panel').trigger('landmark.apihelper', [document.getElementById('landmark-edit-general')]);
+    }
+    if (document.getElementById('mergeLandmarksCollection')) {
+      $('#edit-panel').trigger('landmark-collection.apihelper', [document.getElementById('mergeLandmarksCollection')]);
+    }
   }
 
   /**
