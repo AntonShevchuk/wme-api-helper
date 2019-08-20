@@ -1,6 +1,38 @@
 # WME API Helper
+## Require Script
+```javascript
+// @require https://greasyfork.org/scripts/389117-wme-api-helper/code/WME%20API%20Helper.js?version=XXX
+```
+> See last available version on the GreasyFork page https://greasyfork.org/uk/scripts/389117-wme-api-helper 
+## Initialisation of the API Helper
+For initial helper use method `APIHelper.bootstrap()`:
+```javascript
+(function () {
+  'use strict';
+  APIHelper.bootstrap();
+})();
+```
+
+## Methods
+* `APIHelper.appendStyle(style)` – append CSS style to the page
+* `APIHelper.getVenues(except = [])` – return Array of venues, except some categories
+* `APIHelper.getSegments(except = [])` – return Array of segments, except some road types
+* `APIHelper.getSelectedVenues()` – return Array of the selected venues, which you can edit
+* `APIHelper.getSelectedSegments()` – return Array of the selected segments, which you can edit
+
+## Events
+* `ready.apihelper` – on `document`, when all ready for usage
+* `segment.apihelper` – on `'#edit-panel'`, when chosen some segment for edit
+* `landmark.apihelper` – on `'#edit-panel'`, when chosen some place for edit
+* `landmark-collection.apihelper.apihelper` – on `'#edit-panel'`, when chosen more than one place
+
+## UI Helper
+
+## Example
 
 ```javascript
+// @require https://greasyfork.org/scripts/389117-wme-api-helper/code/WME%20API%20Helper.js?version=726604
+
 (function () {
   'use strict';
 
@@ -103,3 +135,8 @@
 })();
 
 ```
+
+## Links
+Author homepage: http://anton.shevchuk.name/  
+Script homepage: https://github.com/AntonShevchuk/wme-api-helper
+GreasyFork: https://greasyfork.org/uk/scripts/389117-wme-api-helper

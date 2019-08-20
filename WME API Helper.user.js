@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         WME API Helper
-// @version      0.0.2
+// @version      0.0.3
 // @description  API Helper
 // @author       Anton Shevchuk
 // @license      MIT License
@@ -79,7 +79,14 @@ class APIHelper {
       $('#edit-panel').trigger('landmark-collection.apihelper', [document.getElementById('mergeLandmarksCollection')]);
     }
   }
-
+  /**
+   * Normalize title
+   * @param string
+   * @returns {string}
+   */
+  static normalize(string) {
+    return string.replace(/\W+/gi, '-').toLowerCase();
+  }
   /**
    * Apply CSS styles
    */
@@ -90,20 +97,32 @@ class APIHelper {
     document.getElementsByTagName('head')[0].appendChild(style);
   }
   /**
-   * Get all available POI except chosen categories
+   * Get all available POI except selected categories
    * @param {Array} except
    * @return {Array}
    */
-  static getAllPOI(except = []) {
+  static getVenues(except = []) {
     let selected = W.model.venues.getObjectArray();
+    selected = selected.filter((el) => el.isGeometryEditable());
     // filter by main category
     if (except.length) {
       selected = selected.filter(model => except.indexOf(model.getMainCategory()) === -1);
     }
     return selected;
   }
-  static normalize(string) {
-    return string.replace(/\W/gi, '-').toLowerCase();
+  /**
+   * Get all available segments except selected road types
+   * @param {Array} except
+   * @return {Array}
+   */
+  static getSegments(except = []) {
+    let selected = W.model.segments.getObjectArray();
+    selected = selected.filter((el) => el.isGeometryEditable());
+    // filter by road type
+    if (except.length) {
+      selected = selected.filter(segment => except.indexOf(segment.getRoadType()) === -1);
+    }
+    return selected;
   }
   /**
    * @returns {Array}
