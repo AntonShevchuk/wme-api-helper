@@ -97,9 +97,10 @@ class APIHelper {
     document.getElementsByTagName('head')[0].appendChild(style);
   }
   /**
+   * @param {String} uid
    * @param {Object} data
    */
-  addTranslation(uid, data) {
+  static addTranslation(uid, data) {
     let locale = I18n.currentLocale();
     I18n.translations[locale][uid] = data[locale] || data.en;
   }
