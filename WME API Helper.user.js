@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         WME API Helper
-// @version      0.0.3
+// @version      0.0.4
 // @description  API Helper
 // @author       Anton Shevchuk
 // @license      MIT License
