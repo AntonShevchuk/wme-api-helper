@@ -17,7 +17,6 @@
 
 /* jshint esversion: 6 */
 /* global require, window, $, W, I18n, WazeWrap */
-window.APIHelperBootstrap = false;
 class APIHelper {
   static bootstrap() {
     if (!window.APIHelperBootstrap) {
@@ -107,6 +106,9 @@ class APIHelper {
    * @param {Object} data
    */
   static addTranslation(uid, data) {
+    if (!data.en) {
+      console.error('Default translation `en` is required');
+    }
     let locale = I18n.currentLocale();
     I18n.translations[locale][uid] = data[locale] || data.en;
   }
