@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         WME API Helper
-// @version      0.0.5
+// @version      0.0.6
 // @description  API Helper
 // @author       Anton Shevchuk
 // @license      MIT License
@@ -17,11 +17,11 @@
 
 /* jshint esversion: 6 */
 /* global require, window, $, W, I18n, WazeWrap */
-var APIHelperBootstrap = false;
+window.APIHelperBootstrap = false;
 class APIHelper {
   static bootstrap() {
-    if (!APIHelperBootstrap) {
-      APIHelperBootstrap = true;
+    if (!window.APIHelperBootstrap) {
+      window.APIHelperBootstrap = true;
       APIHelper.check();
     }
   }
