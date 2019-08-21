@@ -38,8 +38,10 @@ For initial helper use method `APIHelper.bootstrap()`:
 
   let helper, panel, tab;
 
+  // uniq script name
+  const NAME = 'Some Script';
   // translation structure
-  let translation = {
+  const TRANSLATION = {
     'en': {
       title: 'Title example',
       buttons: {
@@ -81,11 +83,14 @@ For initial helper use method `APIHelper.bootstrap()`:
     }
   };
 
+  APIHelper.bootstrap();
+  APIHelper.addTranslation(NAME, TRANSLATION);
+  
   // buttons structure
   let buttons = {
     A: {
-      title: 'BTN1',
-      description: 'Button 1 can do smth',
+      title: I180n.t(NAME).buttons.A.title,
+      description: I180n.t(NAME).buttons.A.description,
       shortcut: 'S+49',
       callback: function() {
         console.log('Button 1');
@@ -93,8 +98,8 @@ For initial helper use method `APIHelper.bootstrap()`:
       }
     },
     B: {
-      title: 'BTN2',
-      description: 'Button 2 can do smth',
+      title: I180n.t(NAME).buttons.B.title,
+      description: I180n.t(NAME).buttons.B.description,
       shortcut: 'S+50',
       callback: function() {
         console.log('Button 2');
@@ -103,7 +108,6 @@ For initial helper use method `APIHelper.bootstrap()`:
     },
   };
 
-  APIHelper.bootstrap();
 
   $(document)
       .on('ready.apihelper', function () {
@@ -138,5 +142,5 @@ For initial helper use method `APIHelper.bootstrap()`:
 
 ## Links
 Author homepage: http://anton.shevchuk.name/  
-Script homepage: https://github.com/AntonShevchuk/wme-api-helper
+Script homepage: https://github.com/AntonShevchuk/wme-api-helper  
 GreasyFork: https://greasyfork.org/uk/scripts/389117-wme-api-helper

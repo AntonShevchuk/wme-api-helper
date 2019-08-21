@@ -97,6 +97,13 @@ class APIHelper {
     document.getElementsByTagName('head')[0].appendChild(style);
   }
   /**
+   * @param {Object} data
+   */
+  addTranslation(uid, data) {
+    let locale = I18n.currentLocale();
+    I18n.translations[locale][uid] = data[locale] || data.en;
+  }
+  /**
    * Get all available POI except selected categories
    * @param {Array} except
    * @return {Array}
@@ -161,25 +168,6 @@ class APIHelperUI {
   }
   createTab(title) {
     return new APIHelperUITab(this.uid, title);
-  }
-  /**
-   * @param {Object} data
-   */
-  addTranslate(data) {
-    let locale = I18n.currentLocale();
-    I18n.translations[locale][this.uid] = data[locale] || data.en;
-  }
-  /**
-   * Mixin buttons with translations
-   */
-  applyTranslate(buttons) {
-    $.extend(true, buttons, this.t().buttons);
-  }
-  /**
-   * @returns {Object}
-   */
-  t() {
-    return I18n.t(this.uid);
   }
 }
 
