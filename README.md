@@ -1,6 +1,7 @@
 # WME API Helper
 ## Require Script
 ```javascript
+// @require https://greasyfork.org/scripts/24851-wazewrap/code/WazeWrap.js
 // @require https://greasyfork.org/scripts/389117-wme-api-helper/code/WME%20API%20Helper.js?version=XXX
 ```
 > See last available version on the GreasyFork page https://greasyfork.org/uk/scripts/389117-wme-api-helper 
@@ -19,6 +20,7 @@ For initial helper use method `APIHelper.bootstrap()`:
 * `APIHelper.getSegments(except = [])` – return Array of segments, except some road types
 * `APIHelper.getSelectedVenues()` – return Array of the selected venues, which you can edit
 * `APIHelper.getSelectedSegments()` – return Array of the selected segments, which you can edit
+* `APIHelper.addTranslation(uid, data)` – add translation data to I18n object
 
 ## Events
 * `ready.apihelper` – on `document`, when all ready for usage
@@ -31,8 +33,6 @@ For initial helper use method `APIHelper.bootstrap()`:
 ## Example
 
 ```javascript
-// @require https://greasyfork.org/scripts/389117-wme-api-helper/code/WME%20API%20Helper.js?version=726604
-
 (function () {
   'use strict';
 
@@ -114,8 +114,6 @@ For initial helper use method `APIHelper.bootstrap()`:
         console.info('@ready');
 
         helper = new APIHelperUI('Example Script');
-        helper.addTranslate(translation);
-        helper.applyTranslate(buttons);
 
         panel = helper.createPanel(helper.t().title);
         panel.addButtons(buttons);
