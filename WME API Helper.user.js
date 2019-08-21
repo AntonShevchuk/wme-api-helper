@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         WME API Helper
-// @version      0.0.4
+// @version      0.0.5
 // @description  API Helper
 // @author       Anton Shevchuk
 // @license      MIT License
@@ -17,12 +17,19 @@
 
 /* jshint esversion: 6 */
 /* global require, window, $, W, I18n, WazeWrap */
+var APIHelperBootstrap = false;
 class APIHelper {
+  static bootstrap() {
+    if (!APIHelperBootstrap) {
+      APIHelperBootstrap = true;
+      APIHelper.check();
+    }
+  }
   /**
-   * Bootstrap
+   * Check
    * @param {int} tries
    */
-  static bootstrap(tries = 1) {
+  static check(tries = 1) {
     console.log('API Helper attempt ' + tries);
     if (W &&
         W.map &&
@@ -34,12 +41,11 @@ class APIHelper {
       APIHelper.init();
     } else if (tries < 100) {
       tries++;
-      setTimeout(() => APIHelper.bootstrap(tries), 500);
+      setTimeout(() => APIHelper.check(tries), 500);
     } else {
       console.error('API Helper initialization failed');
     }
   }
-
   /**
    * Initialization
    */
