@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         WME API Helper
-// @version      0.0.6
+// @version      0.0.7
 // @description  API Helper
 // @author       Anton Shevchuk
 // @license      MIT License
@@ -61,6 +61,8 @@ class APIHelper {
           if (node.nodeType === Node.ELEMENT_NODE && node.querySelector('div.selection')) {
             if (node.querySelector('#segment-edit-general')) {
               $('#edit-panel').trigger('segment.apihelper', [node.querySelector('#segment-edit-general')]);
+            } else if (node.querySelector('#node-edit-general')) {
+              $('#edit-panel').trigger('node.apihelper', [node.querySelector('#node-edit-general')]);
             } else if (node.querySelector('#landmark-edit-general')) {
               $('#edit-panel').trigger('landmark.apihelper', [node.querySelector('#landmark-edit-general')]);
             } else if (node.querySelector('#mergeLandmarksCollection')) {
@@ -76,6 +78,9 @@ class APIHelper {
 
     if (document.getElementById('segment-edit-general')) {
       $('#edit-panel').trigger('segment.apihelper', [document.getElementById('segment-edit-general')]);
+    }
+    if (document.getElementById('node-edit-general')) {
+      $('#edit-panel').trigger('node.apihelper', [document.getElementById('node-edit-general')]);
     }
     if (document.getElementById('landmark-edit-general')) {
       $('#edit-panel').trigger('landmark.apihelper', [document.getElementById('landmark-edit-general')]);
