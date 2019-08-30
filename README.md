@@ -21,6 +21,7 @@ For initial helper use method `APIHelper.bootstrap()`:
 * `APIHelper.getSegments(except = [])` – return Array of segments, except some road types
 * `APIHelper.getSelectedVenues()` – return Array of the selected venues, which you can edit
 * `APIHelper.getSelectedSegments()` – return Array of the selected segments, which you can edit
+* `APIHelper.getSelectedNode()` – return Model of the selected node, which you can edit, or null
 * `APIHelper.addTranslation(uid, data)` – add translation data to I18n object
 
 ## Events
@@ -77,4 +78,4 @@ For initial helper use method `APIHelper.bootstrap()`:
 ## Links
 Author homepage: http://anton.shevchuk.name/  
 Script homepage: https://github.com/AntonShevchuk/wme-api-helper  
-GreasyFork: https://greasyfork.org/uk/scripts/389117-apihelper
+GreasyFork: https://greasyfork.org/uk/scripts/389117-apihelper  
