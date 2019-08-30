@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         APIHelper
-// @version      0.1.0
+// @version      0.1.1
 // @description  API Helper
 // @author       Anton Shevchuk
 // @license      MIT License
@@ -183,5 +183,16 @@ class APIHelper {
    */
   static getSelectedSegments() {
     return APIHelper.getSelected().filter((el) => el.type === 'segment');
+  }
+  /**
+   * Get selected Node
+   * @return {Object}
+   */
+  static getSelectedNode() {
+    let selected = APIHelper.getSelected().filter((el) => el.type === 'node');
+    if (selected.length) {
+      return selected[0];
+    }
+    return null;
   }
 }

@@ -5,6 +5,7 @@
 // @require https://greasyfork.org/scripts/389117-apihelper/code/APIHelper.js?version=XXX
 ```
 > See last available version on the GreasyFork homepage 
+
 ## Initialisation of the API Helper
 For initial helper use method `APIHelper.bootstrap()`:
 ```javascript
