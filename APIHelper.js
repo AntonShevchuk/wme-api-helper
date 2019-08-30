@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         APIHelper
-// @version      0.2.0
+// @version      0.3.0
 // @description  API Helper
 // @author       Anton Shevchuk
 // @license      MIT License
@@ -21,6 +21,9 @@
  * Library for WME script developers
  */
 class APIHelper {
+  /**
+   * Bootstrap it once!
+   */
   static bootstrap() {
     if (!window.APIHelperBootstrap) {
       window.APIHelperBootstrap = true;
@@ -34,10 +37,10 @@ class APIHelper {
   static check(tries = 1) {
     console.log('API Helper attempt ' + tries);
     if (W &&
-        W.map &&
-        W.model &&
-        W.loginManager.user &&
-        WazeWrap.Ready
+      W.map &&
+      W.model &&
+      W.loginManager.user &&
+      WazeWrap.Ready
     ) {
       console.log('API Helper was initialized');
       APIHelper.init();
@@ -55,50 +58,43 @@ class APIHelper {
     let $document = $(document);
     $document.trigger('ready.apihelper');
 
-    // Initial Mutation Observer
-    // Check for changes in the edit-panel
-    let speedLimitsObserver = new MutationObserver(function (mutations) {
-      mutations.forEach(function (mutation) {
-        for (let i = 0, total = mutation.addedNodes.length; i < total; i++) {
-          let node = mutation.addedNodes[i];
-          // Only fire up if it's a node
-          if (node.nodeType === Node.ELEMENT_NODE && node.querySelector('div.selection')) {
-            if (node.querySelector('#segment-edit-general')) {
-              $document.trigger('segment.apihelper', [node.querySelector('#segment-edit-general')]);
-            } else if (node.querySelector('#node-edit-general')) {
-              $document.trigger('node.apihelper', [node.querySelector('#node-edit-general')]);
-            } else if (node.querySelector('#landmark-edit-general')) {
-              $document.trigger('landmark.apihelper', [node.querySelector('#landmark-edit-general')]);
-            } else if (node.querySelector('#mergeLandmarksCollection')) {
-              $document.trigger('landmark-collection.apihelper', [node.querySelector('#mergeLandmarksCollection')]);
-            }
+    let trigger = function(selected) {
+      if (selected.length === 0) {
+        $document.trigger('none.apihelper');
+        return;
+      }
+      let editPanel = document.getElementById('edit-panel');
+      switch (selected[0].model.type) {
+        case 'node':
+          $document.trigger('node.apihelper', [editPanel.querySelector('#node-edit-general')]);
+          break;
+        case 'segment':
+          $document.trigger('segment.apihelper', [editPanel.querySelector('#segment-edit-general')]);
+          break;
+        case 'venue':
+          if (selected.length > 1) {
+            $document.trigger('landmark-collection.apihelper', [editPanel.querySelector('#mergeLandmarksCollection')]);
+          } else {
+            $document.trigger('landmark.apihelper', [editPanel.querySelector('#landmark-edit-general')]);
           }
-        }
-      });
+          break;
+      }
+    };
+
+    // Initial handler for fire events
+    W.selectionManager.events.register('selectionchanged', null, function (event) {
+      trigger(event.selected);
     });
 
-    speedLimitsObserver.observe(document.getElementById('edit-panel'), {childList: true, subtree: true});
-    console.log('API Helper observer was run');
-
-    if (document.getElementById('segment-edit-general')) {
-      $document.trigger('segment.apihelper', [document.getElementById('segment-edit-general')]);
-    }
-    if (document.getElementById('node-edit-general')) {
-      $document.trigger('node.apihelper', [document.getElementById('node-edit-general')]);
-    }
-    if (document.getElementById('landmark-edit-general')) {
-      $document.trigger('landmark.apihelper', [document.getElementById('landmark-edit-general')]);
-    }
-    if (document.getElementById('mergeLandmarksCollection')) {
-      $document.trigger('landmark-collection.apihelper', [document.getElementById('mergeLandmarksCollection')]);
-    }
+    trigger(W.selectionManager.getSelectedFeatures());
 
     let logger = function(event) {
-      console.log('APIHelper: ' + event.type + '.' + event.namespace);
+      console.log('APIHelper: fire `' + event.type + '.' + event.namespace + '` event');
     };
 
     $document
       .on('ready.apihelper', logger)
+      .on('none.apihelper', logger)
       .on('segment.apihelper', logger)
       .on('node.apihelper', logger)
       .on('landmark.apihelper', logger)
@@ -118,8 +114,8 @@ class APIHelper {
    */
   static addStyle(css) {
     let style = document.createElement('style');
-        style.type = 'text/css'; // is required
-        style.innerHTML = css;
+    style.type = 'text/css'; // is required
+    style.innerHTML = css;
     document.querySelector('head').appendChild(style);
   }
   /**
