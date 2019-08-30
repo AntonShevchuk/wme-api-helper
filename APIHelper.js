@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         APIHelper
-// @version      0.1.2
+// @version      0.2.0
 // @description  API Helper
 // @author       Anton Shevchuk
 // @license      MIT License
@@ -16,6 +16,10 @@
 
 /* jshint esversion: 6 */
 /* global require, window, $, W, I18n, WazeWrap */
+
+/**
+ * Library for WME script developers
+ */
 class APIHelper {
   static bootstrap() {
     if (!window.APIHelperBootstrap) {
@@ -48,9 +52,8 @@ class APIHelper {
    * Initialization
    */
   static init() {
-    $(document).trigger('ready.apihelper');
-
-    let $editPanel = $('#edit-panel');
+    let $document = $(document);
+    $document.trigger('ready.apihelper');
 
     // Initial Mutation Observer
     // Check for changes in the edit-panel
@@ -61,13 +64,13 @@ class APIHelper {
           // Only fire up if it's a node
           if (node.nodeType === Node.ELEMENT_NODE && node.querySelector('div.selection')) {
             if (node.querySelector('#segment-edit-general')) {
-              $editPanel.trigger('segment.apihelper', [node.querySelector('#segment-edit-general')]);
+              $document.trigger('segment.apihelper', [node.querySelector('#segment-edit-general')]);
             } else if (node.querySelector('#node-edit-general')) {
-              $editPanel.trigger('node.apihelper', [node.querySelector('#node-edit-general')]);
+              $document.trigger('node.apihelper', [node.querySelector('#node-edit-general')]);
             } else if (node.querySelector('#landmark-edit-general')) {
-              $editPanel.trigger('landmark.apihelper', [node.querySelector('#landmark-edit-general')]);
+              $document.trigger('landmark.apihelper', [node.querySelector('#landmark-edit-general')]);
             } else if (node.querySelector('#mergeLandmarksCollection')) {
-              $editPanel.trigger('landmark-collection.apihelper', [node.querySelector('#mergeLandmarksCollection')]);
+              $document.trigger('landmark-collection.apihelper', [node.querySelector('#mergeLandmarksCollection')]);
             }
           }
         }
@@ -78,28 +81,28 @@ class APIHelper {
     console.log('API Helper observer was run');
 
     if (document.getElementById('segment-edit-general')) {
-      $editPanel.trigger('segment.apihelper', [document.getElementById('segment-edit-general')]);
+      $document.trigger('segment.apihelper', [document.getElementById('segment-edit-general')]);
     }
     if (document.getElementById('node-edit-general')) {
-      $editPanel.trigger('node.apihelper', [document.getElementById('node-edit-general')]);
+      $document.trigger('node.apihelper', [document.getElementById('node-edit-general')]);
     }
     if (document.getElementById('landmark-edit-general')) {
-      $editPanel.trigger('landmark.apihelper', [document.getElementById('landmark-edit-general')]);
+      $document.trigger('landmark.apihelper', [document.getElementById('landmark-edit-general')]);
     }
     if (document.getElementById('mergeLandmarksCollection')) {
-      $editPanel.trigger('landmark-collection.apihelper', [document.getElementById('mergeLandmarksCollection')]);
+      $document.trigger('landmark-collection.apihelper', [document.getElementById('mergeLandmarksCollection')]);
     }
 
     let logger = function(event) {
       console.log('APIHelper: ' + event.type + '.' + event.namespace);
     };
 
-    $(document)
+    $document
       .on('ready.apihelper', logger)
-      .on('segment.apihelper', '#edit-panel', logger)
-      .on('node.apihelper', '#edit-panel', logger)
-      .on('landmark.apihelper', '#edit-panel', logger)
-      .on('landmark-collection', '#edit-panel', logger)
+      .on('segment.apihelper', logger)
+      .on('node.apihelper', logger)
+      .on('landmark.apihelper', logger)
+      .on('landmark-collection.apihelper', logger)
     ;
   }
   /**
@@ -113,11 +116,11 @@ class APIHelper {
   /**
    * Apply CSS styles
    */
-  static appendStyle(css) {
+  static addStyle(css) {
     let style = document.createElement('style');
-    style.type = 'text/css';
-    style.innerHTML = css;
-    document.getElementsByTagName('head')[0].appendChild(style);
+        style.type = 'text/css'; // is required
+        style.innerHTML = css;
+    document.querySelector('head').appendChild(style);
   }
   /**
    * @param {String} uid

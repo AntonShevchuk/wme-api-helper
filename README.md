@@ -16,20 +16,21 @@ For initial helper use method `APIHelper.bootstrap()`:
 ```
 
 ## Methods
-* `APIHelper.appendStyle(style)` – append CSS style to the page
+* `APIHelper.bootstrap()` — initialization of the helper, for setup event triggers
+* `APIHelper.addStyle(style)` – append CSS style to the page
+* `APIHelper.addTranslation(uid, data)` – add translation data to I18n object
 * `APIHelper.getVenues(except = [])` – return Array of venues, except some categories
 * `APIHelper.getSegments(except = [])` – return Array of segments, except some road types
 * `APIHelper.getSelectedVenues()` – return Array of the selected venues, which you can edit
 * `APIHelper.getSelectedSegments()` – return Array of the selected segments, which you can edit
 * `APIHelper.getSelectedNode()` – return Model of the selected node, which you can edit, or null
-* `APIHelper.addTranslation(uid, data)` – add translation data to I18n object
 
 ## Events
 * `ready.apihelper` – on `document`, when all ready for usage
-* `node.apihelper` – on `'#edit-panel'`, when chosen some node for edit
-* `segment.apihelper` – on `'#edit-panel'`, when chosen some segment for edit
-* `landmark.apihelper` – on `'#edit-panel'`, when chosen some place for edit
-* `landmark-collection.apihelper.apihelper` – on `'#edit-panel'`, when chosen more than one place
+* `node.apihelper` – on `document`, when chosen some node for edit
+* `segment.apihelper` – on `document`, when chosen some segment for edit
+* `landmark.apihelper` – on `document`, when chosen some place for edit
+* `landmark-collection.apihelper.apihelper` – on `document`, when chosen more than one place
 
 ## Example
 
@@ -59,16 +60,16 @@ For initial helper use method `APIHelper.bootstrap()`:
       .on('ready.apihelper', function () {
         console.info('@ready');
       })
-      .on('node.apihelper', '#edit-panel', (e, el) => {
+      .on('node.apihelper', (e, el) => {
         console.info('@node', el);
       })
-      .on('segment.apihelper', '#edit-panel', (e, el) => {
+      .on('segment.apihelper', (e, el) => {
         console.info('@segment', el);
       })
-      .on('landmark.apihelper', '#edit-panel', (e, el) => {
+      .on('landmark.apihelper', (e, el) => {
         console.info('@landmark', el);
       })
-      .on('landmark-collection.apihelper', '#edit-panel', (e, el) => {
+      .on('landmark-collection.apihelper', (e, el) => {
         console.info('@landmark-collection', el)
       });
 })();
