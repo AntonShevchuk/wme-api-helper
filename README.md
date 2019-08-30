@@ -1,9 +1,10 @@
 # WME API Helper
 ## Require Script
 ```javascript
-// @require https://greasyfork.org/scripts/389117-wme-api-helper/code/APIHelper.js?version=XXX
+// @require https://greasyfork.org/scripts/24851-wazewrap/code/WazeWrap.js
+// @require https://greasyfork.org/scripts/389117-apihelper/code/APIHelper.js?version=XXX
 ```
-> See last available version on the GreasyFork page https://greasyfork.org/uk/scripts/389117-wme-api-helper 
+> See last available version on the GreasyFork homepage 
 ## Initialisation of the API Helper
 For initial helper use method `APIHelper.bootstrap()`:
 ```javascript
@@ -23,11 +24,10 @@ For initial helper use method `APIHelper.bootstrap()`:
 
 ## Events
 * `ready.apihelper` – on `document`, when all ready for usage
+* `node.apihelper` – on `'#edit-panel'`, when chosen some node for edit
 * `segment.apihelper` – on `'#edit-panel'`, when chosen some segment for edit
 * `landmark.apihelper` – on `'#edit-panel'`, when chosen some place for edit
 * `landmark-collection.apihelper.apihelper` – on `'#edit-panel'`, when chosen more than one place
-
-## UI Helper
 
 ## Example
 
@@ -57,8 +57,11 @@ For initial helper use method `APIHelper.bootstrap()`:
       .on('ready.apihelper', function () {
         console.info('@ready');
       })
+      .on('node.apihelper', '#edit-panel', (e, el) => {
+        console.info('@node', el);
+      })
       .on('segment.apihelper', '#edit-panel', (e, el) => {
-        console.log('@segment', el);
+        console.info('@segment', el);
       })
       .on('landmark.apihelper', '#edit-panel', (e, el) => {
         console.info('@landmark', el);
@@ -73,4 +76,4 @@ For initial helper use method `APIHelper.bootstrap()`:
 ## Links
 Author homepage: http://anton.shevchuk.name/  
 Script homepage: https://github.com/AntonShevchuk/wme-api-helper  
-GreasyFork: https://greasyfork.org/uk/scripts/389117-wme-api-helper
+GreasyFork: https://greasyfork.org/uk/scripts/389117-apihelper
