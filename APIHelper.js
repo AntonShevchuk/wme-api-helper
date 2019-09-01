@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         APIHelper
-// @version      0.3.0
+// @version      0.3.1
 // @description  API Helper
 // @author       Anton Shevchuk
 // @license      MIT License
@@ -21,6 +21,9 @@
  * Library for WME script developers
  */
 class APIHelper {
+  static log(message) {
+    console.log('%cAPIHelper:%c ' + message, 'color: #0DAD8D; font-weight: bold', 'color: dimgray; font-weight: normal');
+  }
   /**
    * Bootstrap it once!
    */
@@ -35,20 +38,20 @@ class APIHelper {
    * @param {int} tries
    */
   static check(tries = 1) {
-    console.log('API Helper attempt ' + tries);
+    APIHelper.log('attempt ' + tries);
     if (W &&
       W.map &&
       W.model &&
       W.loginManager.user &&
       WazeWrap.Ready
     ) {
-      console.log('API Helper was initialized');
+      APIHelper.log('was initialized');
       APIHelper.init();
     } else if (tries < 100) {
       tries++;
       setTimeout(() => APIHelper.check(tries), 500);
     } else {
-      console.error('API Helper initialization failed');
+      APIHelper.log('initialization failed');
     }
   }
   /**
@@ -89,7 +92,7 @@ class APIHelper {
     trigger(W.selectionManager.getSelectedFeatures());
 
     let logger = function(event) {
-      console.log('APIHelper: fire `' + event.type + '.' + event.namespace + '` event');
+      APIHelper.log(event.type + '.' + event.namespace);
     };
 
     $document
