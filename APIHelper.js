@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         APIHelper
-// @version      0.3.1
+// @version      0.4.0
 // @description  API Helper
 // @author       Anton Shevchuk
 // @license      MIT License
@@ -42,11 +42,16 @@ class APIHelper {
     if (W &&
       W.map &&
       W.model &&
-      W.loginManager.user &&
-      WazeWrap.Ready
+      W.loginManager.user
     ) {
-      APIHelper.log('was initialized');
-      APIHelper.init();
+      // WazeWrap is optional, but we should wait for it
+      if (WazeWrap && !WazeWrap.Ready) {
+        tries++;
+        setTimeout(() => APIHelper.check(tries), 500);
+      } else {
+        APIHelper.log('was initialized');
+        APIHelper.init();
+      }
     } else if (tries < 100) {
       tries++;
       setTimeout(() => APIHelper.check(tries), 500);
