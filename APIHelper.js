@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         APIHelper
-// @version      0.4.0
+// @version      0.4.1
 // @description  API Helper
 // @author       Anton Shevchuk
 // @license      MIT License
@@ -44,8 +44,8 @@ class APIHelper {
       W.model &&
       W.loginManager.user
     ) {
-      // WazeWrap is optional, but we should wait for it
-      if (WazeWrap && !WazeWrap.Ready) {
+      // WazeWrap is optional, but we should wait for Ready state
+      if ('WazeWrap' in window && !WazeWrap.Ready) {
         tries++;
         setTimeout(() => APIHelper.check(tries), 500);
       } else {
