@@ -1,7 +1,6 @@
 # WME API Helper
 ## Require Script
 ```javascript
-// @require https://greasyfork.org/scripts/24851-wazewrap/code/WazeWrap.js
 // @require https://greasyfork.org/scripts/389117-apihelper/code/APIHelper.js?version=XXX
 ```
 > See last available version on the GreasyFork homepage 
@@ -14,6 +13,14 @@ For initial helper use method `APIHelper.bootstrap()`:
   APIHelper.bootstrap();
 })();
 ```
+
+This library will **run once** for all scripts!
+
+## Console output
+
+![](screenshot.png)
+
+> It works with WazeWrap too!
 
 ## Methods
 * `APIHelper.bootstrap()` — initialization of the helper, for setup event triggers
@@ -30,7 +37,7 @@ For initial helper use method `APIHelper.bootstrap()`:
 * `node.apihelper` – on `document`, when chosen some node for edit
 * `segment.apihelper` – on `document`, when chosen some segment for edit
 * `landmark.apihelper` – on `document`, when chosen some place for edit
-* `landmark-collection.apihelper.apihelper` – on `document`, when chosen more than one place
+* `landmark-collection.apihelper` – on `document`, when chosen more than one place
 
 ## Example
 
@@ -55,6 +62,10 @@ For initial helper use method `APIHelper.bootstrap()`:
 
   APIHelper.bootstrap();
   APIHelper.addTranslation(NAME, TRANSLATION);
+  APIHelper.addStyle(
+    '#uniq-id div { background-color: #123; }' +
+    ''
+  );
 
   $(document)
       .on('ready.apihelper', function () {
@@ -73,7 +84,6 @@ For initial helper use method `APIHelper.bootstrap()`:
         console.info('@landmark-collection', el)
       });
 })();
-
 ```
 
 ## Links
