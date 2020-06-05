@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         APIHelper
-// @version      0.4.1
+// @version      0.4.2
 // @description  API Helper
 // @author       Anton Shevchuk
 // @license      MIT License
@@ -81,9 +81,9 @@ class APIHelper {
           break;
         case 'venue':
           if (selected.length > 1) {
-            $document.trigger('landmark-collection.apihelper', [editPanel.querySelector('#mergeLandmarksCollection')]);
+            $document.trigger('landmark-collection.apihelper', [editPanel.querySelector('#mergeVenuesCollection')]);
           } else {
-            $document.trigger('landmark.apihelper', [editPanel.querySelector('#landmark-edit-general')]);
+            $document.trigger('landmark.apihelper', [editPanel.querySelector('#venue-edit-general')]);
           }
           break;
       }
