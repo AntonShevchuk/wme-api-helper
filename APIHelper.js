@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         APIHelper
-// @version      0.4.2
+// @version      0.5.0
 // @description  API Helper
 // @author       Anton Shevchuk
 // @license      MIT License
@@ -64,7 +64,7 @@ class APIHelper {
    */
   static init() {
     let $document = $(document);
-    $document.trigger('ready.apihelper');
+    $document.trigger('init.apihelper');
 
     let trigger = function(selected) {
       if (selected.length === 0) {
@@ -82,8 +82,10 @@ class APIHelper {
         case 'venue':
           if (selected.length > 1) {
             $document.trigger('landmark-collection.apihelper', [editPanel.querySelector('#mergeVenuesCollection')]);
+            $document.trigger('venue-collection.apihelper', [editPanel.querySelector('#mergeVenuesCollection')]);
           } else {
             $document.trigger('landmark.apihelper', [editPanel.querySelector('#venue-edit-general')]);
+            $document.trigger('venue.apihelper', [editPanel.querySelector('#venue-edit-general')]);
           }
           break;
       }
@@ -101,7 +103,7 @@ class APIHelper {
     };
 
     $document
-      .on('ready.apihelper', logger)
+      .on('init.apihelper', logger)
       .on('none.apihelper', logger)
       .on('segment.apihelper', logger)
       .on('node.apihelper', logger)
