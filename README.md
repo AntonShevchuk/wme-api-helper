@@ -33,7 +33,7 @@ This library will **run once** for all scripts!
 * `APIHelper.getSelectedNode()` – return Model of the selected node, which you can edit, or null
 
 ## Events
-* `ready.apihelper` – on `document`, when all ready for usage
+* `init.apihelper` – on `document`, when all ready for usage
 * `node.apihelper` – on `document`, when chosen some node for edit
 * `segment.apihelper` – on `document`, when chosen some segment for edit
 * `landmark.apihelper` – on `document`, when chosen some place for edit
@@ -68,7 +68,7 @@ This library will **run once** for all scripts!
   );
 
   $(document)
-      .on('ready.apihelper', function () {
+      .on('init.apihelper', function () {
         console.info('@ready');
       })
       .on('node.apihelper', (e, el) => {
