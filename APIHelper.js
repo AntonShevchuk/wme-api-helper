@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         APIHelper
-// @version      0.5.0
+// @version      0.5.1
 // @description  API Helper
 // @author       Anton Shevchuk
 // @license      MIT License
