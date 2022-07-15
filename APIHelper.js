@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         APIHelper
-// @version      0.5.0
+// @version      0.5.1
 // @description  API Helper
 // @author       Anton Shevchuk
 // @license      MIT License
@@ -42,6 +42,7 @@ class APIHelper {
     if (W &&
       W.map &&
       W.model &&
+      W.model.countries.top &&
       W.loginManager.user
     ) {
       // WazeWrap is optional, but we should wait for Ready state
