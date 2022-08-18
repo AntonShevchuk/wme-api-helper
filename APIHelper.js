@@ -42,6 +42,7 @@ class APIHelper {
     if (W &&
       W.map &&
       W.model &&
+      W.model.countries.top &&
       W.loginManager.user
     ) {
       // WazeWrap is optional, but we should wait for Ready state
