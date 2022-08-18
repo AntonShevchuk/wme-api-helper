@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         APIHelper
-// @version      0.5.0
+// @version      0.5.1
 // @description  API Helper
 // @author       Anton Shevchuk
 // @license      MIT License
@@ -28,8 +28,8 @@ class APIHelper {
    * Bootstrap it once!
    */
   static bootstrap() {
-    if (!window.APIHelperBootstrap) {
-      window.APIHelperBootstrap = true;
+    if (!Window.APIHelperBootstrap) {
+      Window.APIHelperBootstrap = true;
       APIHelper.check();
     }
   }
