@@ -28,9 +28,13 @@ This library will **run once** for all scripts!
 * `APIHelper.addTranslation(uid, data)` – add translation data to I18n object
 * `APIHelper.getVenues(except = [])` – return Array of venues, except some categories
 * `APIHelper.getSegments(except = [])` – return Array of segments, except some road types
-* `APIHelper.getSelectedVenues()` – return Array of the selected venues, which you can edit
-* `APIHelper.getSelectedSegments()` – return Array of the selected segments, which you can edit
-* `APIHelper.getSelectedNode()` – return Model of the selected node, which you can edit, or null
+* `APIHelper.getSelected()` – return Array of the selected **models**, which you can edit
+* `APIHelper.getSelectedVenues()` – return Array of the selected venues **models**, which you can edit
+* `APIHelper.getSelectedVenue()` – return **model** of the selected venue, which you can edit
+* `APIHelper.getSelectedSegments()` – return Array of the selected segments **models**, which you can edit
+* `APIHelper.getSelectedSegments()` – return **model** of the selected segment, which you can edit
+* `APIHelper.getSelectedNodes()` – return Array of the selected nodes **models**, which you can edit, or null
+* `APIHelper.getSelectedNode()` – return **model** of the selected node, which you can edit, or null
 
 ## Events
 * `init.apihelper` – on `document`, when all ready for usage
